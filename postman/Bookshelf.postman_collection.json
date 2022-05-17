@@ -1,0 +1,31 @@
+{
+	"info": {
+		"_postman_id": "aa2d817f-3f48-46db-b06c-bcea6a0164d4",
+		"name": "Bookshelf",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/Bookshelf-1.0-SNAPSHOT/resource/test/test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Bookshelf-1.0-SNAPSHOT/resource/test/test",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Bookshelf-1.0-SNAPSHOT",
+						"resource",
+						"test",
+						"test"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

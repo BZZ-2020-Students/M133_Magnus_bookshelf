@@ -1,5 +1,7 @@
 package ch.bookshelf.model;
 
+import ch.bookshelf.data.DataHandler;
+
 import java.math.BigDecimal;
 
 public class Book {
@@ -9,6 +11,18 @@ public class Book {
     private Publisher publisher;
     private BigDecimal price;
     private String isbn;
+
+    public String getPublisherUUID() {
+        return getPublisher().getPublisherUUID();
+    }
+
+    public void setPublisherUUID(String publisherUUID) {
+        setPublisher( new Publisher());
+        Publisher publisher = DataHandler.getInstance().readPublisherByUUID(publisherUUID);
+        getPublisher().setPublisherUUID(publisherUUID);
+        getPublisher().setPublisher(publisher.getPublisher());
+
+    }
 
     public String getBookUUID() {
         return bookUUID;
