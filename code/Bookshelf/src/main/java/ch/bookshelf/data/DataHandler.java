@@ -3,10 +3,12 @@ package ch.bookshelf.data;
 import ch.bookshelf.model.Book;
 import ch.bookshelf.model.Publisher;
 import ch.bookshelf.service.Config;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -158,5 +160,40 @@ public class DataHandler {
      */
     private void setPublisherList(List<Publisher> publisherList) {
         this.publisherList = publisherList;
+    }
+
+    public void insertBook(Book book) {
+        getBookList().add(book);
+        writeBookJSON();
+    }
+
+    public void deleteBook(String bookUUID){
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookUUID.equals(getBookList().get(i).getBookUUID())){
+                getBookList().remove(getBookList().get(i));
+            }
+        }
+        writeBookJSON();
+    }
+
+    public void updateBook(Book book){
+        deleteBook(book.getBookUUID());
+        insertBook(book);
+    }
+
+    private void writeBookJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String bookPath = Config.getProperty("bookJSON");
+        try {
+            fileOutputStream = new FileOutputStream(bookPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getBookList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
