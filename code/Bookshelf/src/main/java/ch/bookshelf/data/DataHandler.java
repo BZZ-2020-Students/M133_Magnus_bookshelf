@@ -31,6 +31,7 @@ public class DataHandler {
 
     /**
      * gets the only instance of this class
+     *
      * @return
      */
     public static DataHandler getInstance() {
@@ -42,6 +43,7 @@ public class DataHandler {
 
     /**
      * reads all books
+     *
      * @return list of books
      */
     public List<Book> readAllBooks() {
@@ -50,6 +52,7 @@ public class DataHandler {
 
     /**
      * reads a book by its uuid
+     *
      * @param bookUUID
      * @return the Book (null=not found)
      */
@@ -65,6 +68,7 @@ public class DataHandler {
 
     /**
      * reads all Publishers
+     *
      * @return list of publishers
      */
     public List<Publisher> readAllPublishers() {
@@ -74,6 +78,7 @@ public class DataHandler {
 
     /**
      * reads a publisher by its uuid
+     *
      * @param publisherUUID
      * @return the Publisher (null=not found)
      */
@@ -126,6 +131,7 @@ public class DataHandler {
             ex.printStackTrace();
         }
     }
+
     /**
      * gets bookList
      *
@@ -167,18 +173,13 @@ public class DataHandler {
         writeBookJSON();
     }
 
-    public void deleteBook(String bookUUID){
-        for (int i = 0; i < bookList.size(); i++) {
-            if (bookUUID.equals(getBookList().get(i).getBookUUID())){
-                getBookList().remove(getBookList().get(i));
-            }
-        }
+    public void deleteBook(String bookUUID) {
+        getBookList().remove(readBookByUUID(bookUUID));
         writeBookJSON();
     }
 
-    public void updateBook(Book book){
-        deleteBook(book.getBookUUID());
-        insertBook(book);
+    public void updateBook(Book book) {
+        writeBookJSON();
     }
 
     private void writeBookJSON() {

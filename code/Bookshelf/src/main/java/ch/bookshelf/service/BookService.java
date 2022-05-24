@@ -95,7 +95,7 @@ public class BookService {
             @FormParam("isbn") String isbn,
             @FormParam("bookUUID") String bookUUID
     ) {
-        Book book = new Book();
+        Book book = DataHandler.getInstance().readBookByUUID(bookUUID);
         book.setBookUUID(UUID.randomUUID().toString());
         book.setTitle(title);
         book.setAuthor(author);
