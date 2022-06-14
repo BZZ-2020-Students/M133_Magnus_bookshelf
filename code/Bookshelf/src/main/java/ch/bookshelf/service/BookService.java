@@ -96,13 +96,12 @@ public class BookService {
             @FormParam("bookUUID") String bookUUID
     ) {
         Book book = DataHandler.getInstance().readBookByUUID(bookUUID);
-        book.setBookUUID(UUID.randomUUID().toString());
+        book.setBookUUID(bookUUID);
         book.setTitle(title);
         book.setAuthor(author);
         book.setPublisherUUID(publisherUUID);
         book.setPrice(price);
         book.setIsbn(isbn);
-        book.setBookUUID(bookUUID);
 
         DataHandler.getInstance().updateBook(book);
 
